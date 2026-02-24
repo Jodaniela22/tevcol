@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Cargos - TEVCOL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="wrap">
+    <a class="brand" th:href="@{/}">TEVCOL</a>
+
+    <nav class="menu">
+      <a th:href="@{/empleados}">Empleados</a>
+      <a class="active" th:href="@{/cargos}">Cargo</a>
+      <a href="#" aria-disabled="true">Cargo Empleado</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="header-box">
+    <div>
+      <h1>Listado de Cargos</h1>
+      <small>Gestión de cargos del sistema</small>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-success" th:href="@{/cargos/nuevo}">+ Nuevo Cargo</a>
+    </div>
+  </section>
+
+  <div th:if="${success}" class="alert alert-success">
+    ✅ <span th:text="${success}"></span>
+  </div>
+
+  <div th:if="${error}" class="alert alert-danger">
+    ❌ <span th:text="${error}"></span>
+  </div>
+
+  <section class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+        <tr>
+          <th class="text-center">ID</th>
+          <th>Nombre</th>
+          <th>Área</th>
+          <th>Proceso</th>
+          <th class="text-center">Estado</th>
+          <th class="text-end">Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="c : ${cargos}">
+          <td class="text-center" th:text="${c.codigoCar}"></td>
+          <td th:text="${c.nombreCar}"></td>
+          <td th:text="${c.areaCar}"></td>
+          <td th:text="${c.procesoCar}"></td>
+
+          <td class="text-center">
+            <span class="badge badge-success" th:if="${c.estadoCar == 'ACTIVO'}">ACTIVO</span>
+            <span class="badge badge-gray" th:if="${c.estadoCar != 'ACTIVO'}" th:text="${c.estadoCar}">INACTIVO</span>
+          </td>
+
+          <td class="text-end">
+            <a class="btn btn-sm btn-warning" th:href="@{'/cargos/editar/' + ${c.codigoCar}}">Editar</a>
+            <a class="btn btn-sm btn-danger"
+               th:href="@{'/cargos/eliminar/' + ${c.codigoCar}}"
+               onclick="return confirm('¿Seguro que deseas eliminar este cargo?');">
+              Eliminar
+            </a>
+          </td>
+        </tr>
+
+        <tr th:if="${#lists.isEmpty(cargos)}">
+          <td colspan="6" class="text-center muted" style="padding:18px;">
+            No hay cargos registrados.
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
