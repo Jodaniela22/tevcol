@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Empleados - TEVCOL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ✅ CSS propio -->
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="wrap">
+    <a class="brand" th:href="@{/}">TEVCOL</a>
+
+    <nav class="menu">
+      <a class="active" th:href="@{/empleados}">Empleados</a>
+      <a href="#" aria-disabled="true">Cargo</a>
+      <a href="#" aria-disabled="true">Cargo Empleado</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="header-box">
+    <div>
+      <h1>Listado de Empleados</h1>
+      <small>Gestión de empleados del sistema</small>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-success" th:href="@{/empleados/nuevo}">+ Nuevo Empleado</a>
+    </div>
+  </section>
+
+  <div th:if="${success}" class="alert alert-success">
+    ✅ <span th:text="${success}"></span>
+  </div>
+
+  <div th:if="${error}" class="alert alert-danger">
+    ❌ <span th:text="${error}"></span>
+  </div>
+
+  <section class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center">ID</th>
+            <th class="text-center">Identificación</th>
+            <th>Nombre completo</th>
+            <th class="text-center">Sexo</th>
+            <th class="text-center">Estado</th>
+            <th class="text-end">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr th:each="e : ${empleados}">
+            <td class="text-center" th:text="${e.codigoEmp}"></td>
+            <td class="text-center" th:text="${e.identificacionEmp}"></td>
+            <td th:text="${e.nombreEmp + ' ' + e.segundoNombreEmp + ' ' + e.apellidoEmp + ' ' + e.segundoApellidoEmp}"></td>
+
+            <td class="text-center">
+              <span class="badge badge-info" th:text="${e.sexoEmp == 1 ? 'Hombre' : 'Mujer'}"></span>
+            </td>
+
+            <td class="text-center">
+              <span class="badge badge-success" th:if="${e.estadoEmp == 'Activo'}">Activo</span>
+              <span class="badge badge-gray" th:if="${e.estadoEmp != 'Activo'}" th:text="${e.estadoEmp}">Inactivo</span>
+            </td>
+
+            <td class="text-end">
+              <a class="btn btn-sm btn-warning" th:href="@{'/empleados/editar/' + ${e.codigoEmp}}">Editar</a>
+              <a class="btn btn-sm btn-danger"
+                 th:href="@{'/empleados/eliminar/' + ${e.codigoEmp}}"
+                 onclick="return confirm('¿Seguro que deseas eliminar este empleado?');">
+                Eliminar
+              </a>
+            </td>
+          </tr>
+
+          <tr th:if="${#lists.isEmpty(empleados)}">
+            <td colspan="6" class="text-center muted" style="padding:18px;">
+              No hay empleados registrados.
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

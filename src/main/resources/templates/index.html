@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio - TEVCOL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="wrap">
+    <a class="brand" th:href="@{/}">TEVCOL</a>
+
+    <nav class="menu">
+      <a th:href="@{/empleados}">Empleados</a>
+      <a href="#" aria-disabled="true">Cargo</a>
+      <a href="#" aria-disabled="true">Cargo Empleado</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="header-box">
+    <div>
+      <h1>Panel Principal</h1>
+      <small>Bienvenido al sistema TEVCOL</small>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" th:href="@{/empleados}">Ir a Empleados</a>
+      <a class="btn btn-secondary" href="#" aria-disabled="true">Cargo</a>
+      <a class="btn btn-secondary" href="#" aria-disabled="true">Cargo Empleado</a>
+    </div>
+  </section>
+
+  <section class="card" style="padding:18px;">
+    <h3 style="margin:0 0 8px 0;">¿Qué puedes hacer?</h3>
+    <p class="muted" style="margin:0 0 14px 0;">
+      Desde aquí puedes administrar la información del personal y sus cargos.
+    </p>
+
+    <div class="actions">
+      <a class="btn btn-success" th:href="@{/empleados/nuevo}">+ Registrar Empleado</a>
+      <a class="btn btn-warning" th:href="@{/empleados}">Ver Listado</a>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

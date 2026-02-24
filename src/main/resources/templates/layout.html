@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>TEVCOL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" th:href="@{/}">TEVCOL</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" th:href="@{/empleados}">Empleados</a></li>
+        <li class="nav-item"><a class="nav-link disabled" href="#">Cargo</a></li>
+        <li class="nav-item"><a class="nav-link disabled" href="#">Cargo Empleado</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container py-4">
+  <!-- ✅ aquí se insertará cada página -->
+  <div th:fragment="content">
+    <p class="text-muted">Layout cargado...</p>
+  </div>
+</main>
+
+</body>
+</html>

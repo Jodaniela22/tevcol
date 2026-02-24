@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${empleado.codigoEmp != null ? 'Editar Empleado' : 'Nuevo Empleado'} + ' - TEVCOL'">Empleado - TEVCOL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="wrap">
+    <a class="brand" th:href="@{/}">TEVCOL</a>
+
+    <nav class="menu">
+      <a class="active" th:href="@{/empleados}">Empleados</a>
+      <a href="#" aria-disabled="true">Cargo</a>
+      <a href="#" aria-disabled="true">Cargo Empleado</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="header-box">
+    <div>
+      <h1 th:text="${empleado.codigoEmp != null ? 'Editar Empleado' : 'Nuevo Empleado'}">Nuevo Empleado</h1>
+      <small>Completa los datos principales (los demás pueden quedar NULL)</small>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-secondary" th:href="@{/empleados}">Volver</a>
+    </div>
+  </section>
+
+  <div th:if="${error}" class="alert alert-danger">
+    ❌ <span th:text="${error}"></span>
+  </div>
+
+  <div class="form-card" style="margin-top:14px;">
+    <form th:action="@{/empleados/guardar}" th:object="${empleado}" method="post">
+
+      <!-- id oculto para editar -->
+      <input type="hidden" th:field="*{codigoEmp}"/>
+
+      <div class="grid">
+
+        <div>
+          <label>Identificación</label>
+          <input type="text" th:field="*{identificacionEmp}" placeholder="Ej: 0912345678" required>
+        </div>
+
+        <div>
+          <label>Sexo</label>
+          <select th:field="*{sexoEmp}" required>
+            <option value="">-- Seleccione --</option>
+            <option value="1">Hombre</option>
+            <option value="2">Mujer</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Primer Nombre</label>
+          <input type="text" th:field="*{nombreEmp}" placeholder="Ej: Juan" required>
+        </div>
+
+        <div>
+          <label>Segundo Nombre</label>
+          <input type="text" th:field="*{segundoNombreEmp}" placeholder="Ej: Carlos" required>
+        </div>
+
+        <div>
+          <label>Primer Apellido</label>
+          <input type="text" th:field="*{apellidoEmp}" placeholder="Ej: Pérez" required>
+        </div>
+
+        <div>
+          <label>Segundo Apellido</label>
+          <input type="text" th:field="*{segundoApellidoEmp}" placeholder="Ej: García" required>
+        </div>
+
+        <div>
+          <label>Estado</label>
+          <select th:field="*{estadoEmp}" required>
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="actions" style="margin-top:14px;">
+        <button type="submit" class="btn btn-primary">
+          Guardar
+        </button>
+        <a class="btn btn-secondary" th:href="@{/empleados}">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+
+</main>
+
+</body>
+</html>
